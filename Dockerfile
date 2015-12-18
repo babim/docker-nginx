@@ -1,10 +1,10 @@
-FROM babim/debianbase
+FROM babim/ubuntubase
 
 MAINTAINER "Duc Anh Babim" <ducanh.babim@yahoo.com>
 
 RUN nginx=stable && \
-    echo "deb http://ppa.launchpad.net/nginx/$nginx/debian jessie main" > /etc/apt/sources.list.d/nginx-$nginx.list && \
-    wget http://nginx.org/keys/nginx_signing.key -O- |apt-key add – && \
+    echo "deb http://ppa.launchpad.net/nginx/$nginx/ubuntu trusty main" > /etc/apt/sources.list.d/nginx-$nginx.list && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C300EE8C && \
     apt-get clean && \
     apt-get update && \
     apt-get install nano nginx -y --force-yes && \
