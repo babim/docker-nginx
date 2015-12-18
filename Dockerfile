@@ -4,7 +4,7 @@ MAINTAINER "Duc Anh Babim" <ducanh.babim@yahoo.com>
 
 RUN nginx=stable && \
     echo "deb http://ppa.launchpad.net/nginx/$nginx/debian jessie main" > /etc/apt/sources.list.d/nginx-$nginx.list && \
-    wget nginx.org/keys/nginx_signing.key && apt-key add nginx_signing.key && rm nginx_signing.key && \
+    wget nginx.org/keys/nginx_signing.key -O- | apt-key add nginx_signing.key && \
     apt-get clean && \
     apt-get update && \
     apt-get install nano nginx -y --force-yes && \
