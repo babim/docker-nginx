@@ -1,10 +1,10 @@
-FROM babim/ubuntubase
+FROM babim/debianbase
 
 MAINTAINER "Duc Anh Babim" <ducanh.babim@yahoo.com>
 
 RUN nginx=stable && \
-    echo "deb http://ppa.launchpad.net/nginx/$nginx/ubuntu trusty main" > /etc/apt/sources.list.d/nginx-$nginx.list && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C300EE8C && \
+    echo "deb http://ppa.launchpad.net/nginx/$nginx/debian jessie main" > /etc/apt/sources.list.d/nginx-$nginx.list && \
+    wget nginx.org/keys/nginx_signing.key && apt-key add nginx_signing.key && rm nginx_signing.key && \
     apt-get clean && \
     apt-get update && \
     apt-get dist-upgrade -y --force-yes && \
@@ -17,6 +17,8 @@ VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/v
 
 # Define working directory.
 WORKDIR /etc/nginx
+
+ENV LC_ALL C.UTF-8
 
 # Define default command.
 CMD ["nginx"]
