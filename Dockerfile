@@ -17,7 +17,7 @@ VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/v
 # Define working directory.
 WORKDIR /etc/nginx
 
-ENV LC_ALL C.UTF-8
+ENV LC_ALL en_US.UTF-8
 
 # Define default command.
 CMD ["nginx"]
