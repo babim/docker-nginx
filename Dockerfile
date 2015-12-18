@@ -7,7 +7,6 @@ RUN nginx=stable && \
     wget nginx.org/keys/nginx_signing.key && apt-key add nginx_signing.key && rm nginx_signing.key && \
     apt-get clean && \
     apt-get update && \
-    apt-get dist-upgrade -y --force-yes && \
     apt-get install nano nginx -y --force-yes && \
     echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
     chown -R www-data:www-data /var/lib/nginx
