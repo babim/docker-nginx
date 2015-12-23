@@ -12,7 +12,7 @@ RUN nginx=stable && \
     chown -R www-data:www-data /var/lib/nginx
 
 # Define mountable directories.
-VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
+VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/"]
 
 # Define working directory.
 WORKDIR /etc/nginx
@@ -23,5 +23,4 @@ ENV TZ Asia/Ho_Chi_Minh
 CMD ["nginx"]
 
 # Expose ports.
-EXPOSE 80
-EXPOSE 443
+EXPOSE 80 443
