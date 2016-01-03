@@ -1,7 +1,5 @@
 FROM babim/ubuntubase
 
-MAINTAINER "Duc Anh Babim" <ducanh.babim@yahoo.com>
-
 RUN nginx=stable && \
     echo "deb http://ppa.launchpad.net/nginx/$nginx/ubuntu trusty main" > /etc/apt/sources.list.d/nginx-$nginx.list && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C300EE8C && \
@@ -17,8 +15,6 @@ VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/v
 # Define working directory.
 WORKDIR /etc/nginx
 
-ENV LC_ALL en_US.UTF-8
-ENV TZ Asia/Ho_Chi_Minh
 # Define default command.
 CMD ["nginx"]
 
