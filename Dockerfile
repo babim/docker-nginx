@@ -1,13 +1,12 @@
-FROM babim/ubuntubase
+FROM babim/debianbase:ssh
 
-RUN nginx=stable && \
-    echo "deb http://ppa.launchpad.net/nginx/$nginx/ubuntu trusty main" > /etc/apt/sources.list.d/nginx-$nginx.list && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C300EE8C && \
-    apt-get clean && \
-    apt-get update && \
-    apt-get install nano nginx -y --force-yes && \
-    echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
-    chown -R www-data:www-data /var/lib/nginx
+ENV NGINX_VERSION 1.9.11-1~jessie
+
+RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
+	&& echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
+	&& apt-get update \
+	&& apt-get install -y ca-certificates nginx=${NGINX_VERSION} gettext-base \
+	&& rm -rf /var/lib/apt/lists/*
 
 # Define mountable directories.
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/"]
@@ -16,7 +15,7 @@ VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/v
 WORKDIR /etc/nginx
 
 # Define default command.
-CMD ["nginx"]
+CMD ["nginx", "-g", "daemon off;"]
 
 # Expose ports.
 EXPOSE 80 443
