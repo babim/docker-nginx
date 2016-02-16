@@ -1,8 +1,7 @@
 FROM babim/debianbase:ssh
 
-ENV nginx stable
-
-RUN echo "deb http://ppa.launchpad.net/nginx/$nginx/debian jessie main" > /etc/apt/sources.list.d/nginx-$nginx.list \
+RUN nginx=stable && \
+	echo "deb http://ppa.launchpad.net/nginx/$nginx/debian jessie main" > /etc/apt/sources.list.d/nginx-$nginx.list \
 	&& wget http://nginx.org/keys/nginx_signing.key -O- |apt-key add – \
 	&& apt-get update \
 	&& apt-get install -y nginx --force-yes \
