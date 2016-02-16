@@ -6,7 +6,8 @@ RUN echo "deb http://ppa.launchpad.net/nginx/$nginx/debian jessie main" > /etc/a
 	&& wget http://nginx.org/keys/nginx_signing.key -O- |apt-key add – \
 	&& apt-get update \
 	&& apt-get install -y nginx --force-yes \
-	&& rm -rf /var/lib/apt/lists/**
+	&& rm -rf /var/lib/apt/lists/** \
+	&& echo "\ndaemon off;" >> /etc/nginx/nginx.conf
 
 # Define mountable directories.
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/"]
