@@ -17,7 +17,7 @@ WORKDIR /etc/nginx
 
 # Copy include file
 COPY phpparam.conf /etc/nginx/include/phpparam.conf
-COPY rootowncloud.conf.conf /etc/nginx/include/rootowncloud.conf
+COPY rootowncloud.conf /etc/nginx/include/rootowncloud.conf
 COPY rootwordpressclean.conf /etc/nginx/include/rootwordpressclean.conf
 COPY restrict.conf /etc/nginx/include/restrict.conf
 COPY owncloud.conf /etc/nginx/include/owncloud.conf
