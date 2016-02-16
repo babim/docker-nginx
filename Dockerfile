@@ -1,12 +1,12 @@
 FROM babim/debianbase:ssh
 
-ENV NGINX_VERSION 1.9.11-1~jessie
+ENV nginx stable
 
-RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
-	&& echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
+RUN echo "deb http://ppa.launchpad.net/nginx/$nginx/debian jessie main" > /etc/apt/sources.list.d/nginx-$nginx.list \
+	&& wget http://nginx.org/keys/nginx_signing.key -O- |apt-key add – \
 	&& apt-get update \
-	&& apt-get install -y ca-certificates nginx=${NGINX_VERSION} gettext-base \
-	&& rm -rf /var/lib/apt/lists/*
+	&& apt-get install -y nginx --force-yes \
+	&& rm -rf /var/lib/apt/lists/**
 
 # Define mountable directories.
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/"]
