@@ -35,7 +35,7 @@ RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 # Define default command.
-CMD ["nginx", "-g;"]
+CMD ["nginx", "-g"]
 
 # Expose ports.
 EXPOSE 80 443
