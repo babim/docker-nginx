@@ -25,10 +25,8 @@ COPY wordpress.conf /etc/nginx/include/wordpress.conf
 COPY wordpressmulti.conf /etc/nginx/include/wordpressmulti.conf
 COPY wpsupercache.conf /etc/nginx/include/wpsupercache.conf
 
-RUN mkdir -p /etc-start/nginx/sites-enabled /etc-start/nginx/certs /etc-start/nginx/conf.d \
-	&& cp -R /etc/nginx/sites-enabled /etc-start/nginx/sites-enabled \
-	&& cp -R /etc/nginx/certs /etc-start/nginx/certs \
-	&& cp -R /etc/nginx/conf.d /etc-start/nginx/conf.d
+RUN mkdir -p /etc-start/nginx \
+	&& cp -R /etc/nginx /etc-start/nginx
 	
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
