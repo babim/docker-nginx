@@ -10,7 +10,7 @@ RUN nginx=stable && \
 	&& echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Define mountable directories.
-VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/"]
+VOLUME ["/etc/nginx", "/var/log/nginx", "/var/www/"]
 
 # Define working directory.
 WORKDIR /etc/nginx
