@@ -7,7 +7,7 @@ RUN nginx=stable && \
 	&& apt-get update \
 	&& apt-get install -y nginx --force-yes \
 	&& rm -rf /var/lib/apt/lists/** \
-	&& echo "\ndaemon off;" >> /etc/nginx/nginx.conf
+	&& echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Define mountable directories.
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/"]
