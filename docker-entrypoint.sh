@@ -6,4 +6,5 @@ then
 	cp -R /etc-start/nginx/* /etc/nginx
 fi
 
-exec "$@"
+nginx
+#exec "$@"
