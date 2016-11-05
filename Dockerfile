@@ -1,4 +1,4 @@
-FROM babim/debianbase:ssh
+FROM babim/debianbase
 
 RUN nginx=stable && \
 	echo 'deb http://nginx.org/packages/debian/ jessie nginx' > /etc/apt/sources.list.d/nginx-$nginx.list \
