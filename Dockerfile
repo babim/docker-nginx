@@ -6,8 +6,7 @@ RUN nginx=stable && \
 	&& wget http://nginx.org/keys/nginx_signing.key -O- |apt-key add - \
 	&& apt-get update \
 	&& apt-get install -y nginx --force-yes \
-	&& rm -rf /var/lib/apt/lists/** \
-	&& echo "daemon off;" >> /etc/nginx/nginx.conf
+	&& rm -rf /var/lib/apt/lists/**
 
 # Define mountable directories.
 VOLUME ["/etc/nginx", "/var/log/nginx", "/var/www/"]
@@ -33,7 +32,7 @@ RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 # Define default command.
-CMD ["nginx"]
+CMD ["nginx", "-g", "daemon off;"]
 
 # Expose ports.
 EXPOSE 80 443
