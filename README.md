@@ -40,6 +40,14 @@ docker run -d -p 80:80 -v <sites-enabled-dir>:/etc/nginx/conf.d -v <certs-dir>:/
 
 After few seconds, open http://<host> to see the welcome page.
 
+
+Volume:
+```
+/var/www
+/etc/nginx
+/etc/php
+```
+
 with environment ID:
 ```
 auid = user id
