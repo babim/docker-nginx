@@ -15,14 +15,7 @@ VOLUME ["/etc/nginx", "/var/log/nginx", "/var/www/"]
 WORKDIR /etc/nginx
 
 # Copy include file
-COPY phpparam.conf /etc/nginx/include/phpparam.conf
-COPY rootowncloud.conf /etc/nginx/include/rootowncloud.conf
-COPY rootwordpressclean.conf /etc/nginx/include/rootwordpressclean.conf
-COPY restrict.conf /etc/nginx/include/restrict.conf
-COPY owncloud.conf /etc/nginx/include/owncloud.conf
-COPY wordpress.conf /etc/nginx/include/wordpress.conf
-COPY wordpressmulti.conf /etc/nginx/include/wordpressmulti.conf
-COPY wpsupercache.conf /etc/nginx/include/wpsupercache.conf
+COPY include /etc/nginx/include
 
 RUN mkdir -p /etc-start/nginx \
 	&& cp -R /etc/nginx/* /etc-start/nginx

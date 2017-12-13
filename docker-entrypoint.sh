@@ -7,6 +7,10 @@ if [ ! -f "/etc/nginx/nginx.conf" ]; then cp -R -f /etc-start/nginx/* /etc/nginx
 agid=${agid:-$auid}
 auser=${auser:-www-data}
 
+	# create folder
+	[[ ! -d /var/cache/nginx ]] || chown -R $auser /var/cache/nginx
+	[[ ! -d /var/log/nginx ]] || chown -R $auser /var/log/nginx
+
 if [[ -z "${auid}" ]]; then
   echo "start"
 elif [[ "$auid" = "0" ]] || [[ "$aguid" == "0" ]]; then
