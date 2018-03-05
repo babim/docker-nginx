@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+export TERM=xterm
 
 if [ ! -f "/etc/nginx/nginx.conf" ]; then cp -R -f /etc-start/nginx/* /etc/nginx; fi
 
@@ -62,4 +62,4 @@ if [ -f "/runcron.sh" ]; then /runcron.sh; fi
 # nfs
 if [ -f "/mountnfs.sh" ]; then /mountnfs.sh; fi
 
-exec "$@"
+nginx -g 'daemon off;'
