@@ -26,9 +26,6 @@ RUN apt-get clean && \
 # Define mountable directories.
 VOLUME ["/etc/nginx", "/var/log/nginx", "/var/www", "/etc/php"]
 
-# Define working directory.
-WORKDIR /etc/nginx
-
 # Copy include file
 COPY include /etc/nginx/include
 
