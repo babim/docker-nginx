@@ -50,14 +50,8 @@ RUN [ -d /etc-start ] || rm -rf /etc-start && \
     [ -d /var/www ] || mkdir -p /etc-start/www && \
     [ -d /var/www ] || cp -R /var/www/* /etc-start/www
 
-COPY docker-entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["nginx", "-g", "'daemon off;'"]
-
-# forward request and error logs to docker log collector
-RUN ln -sf /dev/stdout /var/log/nginx/access.log
-RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 # Expose ports.
 EXPOSE 80 443
