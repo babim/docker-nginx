@@ -38,18 +38,9 @@ RUN apt-get purge wget -y && \
 # Define mountable directories.
 VOLUME ["/etc/nginx", "/var/log/nginx", "/var/www", "/etc/php"]
 
-# Define working directory.
-WORKDIR /etc/nginx
-
-# Copy include file
-COPY include /etc/nginx/include
-
-# create folder    
-RUN [ -d /var/cache/nginx ] || mkdir -p /var/cache/nginx && \
-    [ -d /var/log/nginx ] || mkdir -p /var/log/nginx
-
 # prepare etc start
-RUN [ -d /etc/nginx ] || mkdir -p /etc-start/nginx && \
+RUN [ -d /etc-start ] || rm -rf /etc-start && \
+    [ -d /etc/nginx ] || mkdir -p /etc-start/nginx && \
     [ -d /etc/nginx ] || cp -R /etc/nginx/* /etc-start/nginx && \
     [ -d /etc/php ] || mkdir -p /etc-start/php && \
     [ -d /etc/php ] || cp -R /etc/php/* /etc-start/php && \
