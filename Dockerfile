@@ -14,7 +14,7 @@ RUN apt-get clean && \
 # Define mountable directories.
 VOLUME ["/etc/nginx", "/var/log/nginx", "/var/www", "/etc/php"]
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/start.sh"]
 CMD ["nginx", "-g", "'daemon off;'"]
 
 # Expose ports.
