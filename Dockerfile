@@ -10,7 +10,8 @@ RUN nginx=stable && \
     echo "deb http://ppa.launchpad.net/nginx/$nginx/ubuntu xenial main" > /etc/apt/sources.list.d/nginx-$nginx.list && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C300EE8C && \
     apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install software-properties-common -yq && add-apt-repository ppa:ondrej/php -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install software-properties-common -yq && \
+    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20PHP%20install/php-repo-ubuntu.sh | bash
     apt-get update && apt-get install -y --force-yes nginx && \
     chown -R www-data:www-data /var/lib/nginx && \
     apt-get purge -y apache*
@@ -35,13 +36,7 @@ RUN [ -d /var/cache/nginx ] || mkdir -p /var/cache/nginx && \
 
 # prepare etc start
 RUN [ -d /etc/nginx ] || mkdir -p /etc-start/nginx && \
-    [ -d /etc/nginx ] || cp -R /etc/nginx/* /etc-start/nginx && \
-    [ -d /etc/php ] || mkdir -p /etc-start/php && \
-    [ -d /etc/php ] || cp -R /etc/php/* /etc-start/php && \
-    [ -d /etc/apache2 ] || mkdir -p /etc-start/apache2 && \
-    [ -d /etc/apache2 ] || cp -R /etc/apache2/* /etc-start/apache2 && \
-    [ -d /var/www ] || mkdir -p /etc-start/www && \
-    [ -d /var/www ] || cp -R /var/www/* /etc-start/www
+    [ -d /etc/nginx ] || cp -R /etc/nginx/* /etc-start/nginx
 
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
