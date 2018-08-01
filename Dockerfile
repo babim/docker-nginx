@@ -39,7 +39,7 @@ RUN [ -d /var/cache/nginx ] || mkdir -p /var/cache/nginx && \
 # prepare etc start
 RUN [ -d /etc/nginx ] || mkdir -p /etc-start/nginx && \
     [ -d /etc/nginx ] || cp -R /etc/nginx/* /etc-start/nginx && \
-    [ -d /etc/php ] || mkdir -p /etc-start/nginx /etc-start/php && \
+    [ -d /etc/php ] || mkdir -p /etc-start/php && \
     [ -d /etc/php ] || cp -R /etc/php/* /etc-start/php && \
     [ -d /etc/apache2 ] || mkdir -p /etc-start/apache2 && \
     [ -d /etc/apache2 ] || cp -R /etc/apache2/* /etc-start/apache2 && \
