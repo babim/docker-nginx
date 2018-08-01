@@ -13,6 +13,11 @@ RUN apt-get update && apt-get install -y --force-yes nginx php7.2-fpm \
 # install option for webapp (owncloud)
 RUN apt-get install -y --force-yes imagemagick smbclient ffmpeg ghostscript openexr openexr openexr libxml2 gamin
 
+# install laravel
+RUN apt-get install -y php-*dom php-*mbstring zip unzip git curl && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    ln -sf /usr/bin/php7.2 /etc/alternatives/php
+
 # install oracle client extension
 ENV ORACLE_VERSION 12.2.0.1.0
 RUN apt-get install -y --force-yes wget unzip libaio-dev php5.6-dev php-pear
@@ -53,14 +58,12 @@ RUN [ -d /etc-start ] || rm -rf /etc-start && \
     [ -d /var/www ] || mkdir -p /etc-start/www && \
     [ -d /var/www ] || cp -R /var/www/* /etc-start/www
 
-COPY docker-entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# install laravel 2
+RUN cd /etc-start/www && git clone https://github.com/laravel/laravel && \
+    cd laravel && composer install && cp .env.example .env
+
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["nginx", "-g", "'daemon off;'"]
-
-# forward request and error logs to docker log collector
-RUN ln -sf /dev/stdout /var/log/nginx/access.log
-RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 # Expose ports.
 EXPOSE 80 443
