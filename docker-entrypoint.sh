@@ -1,9 +1,6 @@
 #!/bin/bash
 export TERM=xterm
 
-# option with entrypoint
-if [ -f "/option.sh" ]; then /option.sh; fi
-
 if [ ! -f "/etc/nginx/nginx.conf" ]; then cp -R -f /etc-start/nginx/* /etc/nginx; fi
 
 if [ -d "/etc/php" ]; then
@@ -147,6 +144,9 @@ fi
 fi
 
 fi
+
+# option with entrypoint
+if [ -f "/option.sh" ]; then /option.sh; fi
 
 # run PHP-fpm
 if [ -f "/usr/bin/php-fpm5.6" ]; then php-fpm5.6 -D; fi
