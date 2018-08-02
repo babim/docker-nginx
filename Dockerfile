@@ -1,7 +1,7 @@
 FROM babim/nginx:base
 
 RUN apt-get update && apt-get install -y --force-yes nginx && \
-    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20PHP%20install/php7.0.sh | bash-$ORACLE_VERSION.zip instantclient-sqlplus-linux.x64-$ORACLE_VERSION.zip
+    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20PHP%20install/php7.0.sh | bash
 
 # Fix run suck
 RUN mkdir -p /run/php/
