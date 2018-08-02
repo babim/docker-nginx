@@ -34,13 +34,7 @@ COPY include /etc/nginx/include
 RUN [ -d /var/cache/nginx ] || mkdir -p /var/cache/nginx && \
     [ -d /var/log/nginx ] || mkdir -p /var/log/nginx
 
-# prepare etc start
-RUN [ -d /etc/nginx ] || mkdir -p /etc-start/nginx && \
-    [ -d /etc/nginx ] || cp -R /etc/nginx/* /etc-start/nginx
-
-COPY docker-entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+#ENTRYPOINT ["/entrypoint.sh"]
 CMD ["nginx", "-g", "'daemon off;'"]
 
 # forward request and error logs to docker log collector
