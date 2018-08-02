@@ -11,7 +11,7 @@ RUN nginx=stable && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C300EE8C && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install software-properties-common -yq && \
-    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20PHP%20install/php-repo-ubuntu.sh | bash
+    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20PHP%20install/php-repo-ubuntu.sh | bash && \
     apt-get update && apt-get install -y --force-yes nginx && \
     chown -R www-data:www-data /var/lib/nginx && \
     apt-get purge -y apache*
