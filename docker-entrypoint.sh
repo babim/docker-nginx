@@ -3,9 +3,9 @@ export TERM=xterm
 
 if [ ! -f "/etc/nginx/nginx.conf" ]; then cp -R -f /etc-start/nginx/* /etc/nginx; fi
 
-if [ -z "`ls /etc/php5`" ] 
+if [ -z "`ls /etc/php7`" ] 
 then
-	cp -R /etc-start/php5/* /etc/php5
+	cp -R /etc-start/php7/* /etc/php7
 fi
 
     # Set environments
@@ -28,13 +28,13 @@ fi
 	-e "s/;opcache.enable=0/opcache.enable=0/" \
 	-e "s/error_reporting = .*/error_reporting = E_ALL/" \
 	-e "s/display_errors = .*/display_errors = On/" \
-	/etc/php5/php.ini
+	/etc/php7/php.ini
 
-    sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/php-fpm.conf
-    #sed -i '/^listen = /clisten = 9000' /etc/php5/fpm.d/www.conf && \
-    #sed -i '/^listen.allowed_clients/c;listen.allowed_clients =' /etc/php5/fpm.d/www.conf && \
-    #sed -i '/^;catch_workers_output/ccatch_workers_output = yes' /etc/php5/fpm.d/www.conf && \
-    #sed -i '/^;env\[TEMP\] = .*/aenv[DB_PORT_3306_TCP_ADDR] = $DB_PORT_3306_TCP_ADDR' /etc/php5/fpm.d/www.conf
+    sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php7/php-fpm.conf
+    #sed -i '/^listen = /clisten = 9000' /etc/php7/fpm.d/www.conf && \
+    #sed -i '/^listen.allowed_clients/c;listen.allowed_clients =' /etc/php7/fpm.d/www.conf && \
+    #sed -i '/^;catch_workers_output/ccatch_workers_output = yes' /etc/php7/fpm.d/www.conf && \
+    #sed -i '/^;env\[TEMP\] = .*/aenv[DB_PORT_3306_TCP_ADDR] = $DB_PORT_3306_TCP_ADDR' /etc/php7/fpm.d/www.conf
 
 # set ID docker run
 agid=${agid:-$auid}
@@ -45,8 +45,8 @@ if [[ -z "${auid}" ]]; then
 elif [[ "$auid" = "0" ]] || [[ "$aguid" == "0" ]]; then
 	echo "run in user root"
 	auser=root
-	sed -i -e "/^user = .*/cuser = $auser" /etc/php5/php-fpm.conf
-	sed -i -e "/^group = .*/cgroup = $auser" /etc/php5/php-fpm.conf
+	sed -i -e "/^user = .*/cuser = $auser" /etc/php7/php-fpm.conf
+	sed -i -e "/^group = .*/cgroup = $auser" /etc/php7/php-fpm.conf
 	sed -i -e "/^user .*/cuser  $auser;" /etc/nginx/nginx.conf
 	sed -i -e "/^#user .*/cuser  $auser;" /etc/nginx/nginx.conf
 elif id $auid >/dev/null 2>&1; then
@@ -54,8 +54,8 @@ elif id $auid >/dev/null 2>&1; then
 else
 if id $auser >/dev/null 2>&1; then
         echo "user exists"
-	sed -i -e "/^user = .*/cuser = $auser" /etc/php5/php-fpm.conf
-	sed -i -e "/^group = .*/cgroup = $auser" /etc/php5/php-fpm.conf
+	sed -i -e "/^user = .*/cuser = $auser" /etc/php7/php-fpm.conf
+	sed -i -e "/^group = .*/cgroup = $auser" /etc/php7/php-fpm.conf
 	sed -i -e "/^user .*/cuser  $auser;" /etc/nginx/nginx.conf
 	sed -i -e "/^#user .*/cuser  $auser;" /etc/nginx/nginx.conf
 	# usermod alpine
@@ -70,8 +70,8 @@ else
 	addgroup -g $agid $auser && adduser -D -H -G $auser -s /bin/false -u $auid $auser
 	# create user ubuntu/debian
 	#groupadd -g $agid $auser && useradd --system --uid $auid --shell /usr/sbin/nologin -g $auser $auser
-	sed -i -e "/^user = .*/cuser = $auser" /etc/php5/php-fpm.conf
-	sed -i -e "/^group = .*/cgroup = $auser" /etc/php5/php-fpm.conf
+	sed -i -e "/^user = .*/cuser = $auser" /etc/php7/php-fpm.conf
+	sed -i -e "/^group = .*/cgroup = $auser" /etc/php7/php-fpm.conf
 	sed -i -e "/^user .*/cuser  $auser;" /etc/nginx/nginx.conf
 	sed -i -e "/^#user .*/cuser  $auser;" /etc/nginx/nginx.conf
 fi

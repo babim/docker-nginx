@@ -4,9 +4,9 @@ RUN apk add --no-cache wget bash && cd / && wget --no-check-certificate https://
     chmod 755 /option.sh && apk del --purge wget
 
 RUN apk add --no-cache nginx imagemagick \
-	nano php5-fpm php5-json php5-gd php5-sqlite3 curl php5-curl php5-ldap php5-mysql php5-mysqli php5-pgsql php5-imap php5-bcmath \
-	php5-xmlrpc php5-mcrypt php5-memcache php5-intl php5-zip php5-opcache php5-mssql php5-bz2 php5-odbc php5-gettext php5-dba php5-soap \
-	php5-xml php5-zlib php5-exif php5-pdo php5-pdo_odbc php5-pdo_dblib php5-pdo_sqlite php5-pdo_pgsql php5-pdo_mysql php5-pear
+	nano php7-fpm php7-json php7-gd php7-sqlite3 curl php7-curl php7-ldap php7-mysql php7-pgsql php7-imap php7-bcmath \
+	php7-xmlrpc php7-mcrypt php7-memcache php7-intl php7-zip php7-opcache php7-bz2 php7-odbc php7-soap \
+	php7-xml php7-pear
 
 # forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
@@ -22,12 +22,12 @@ WORKDIR /etc/nginx
 COPY include /etc/nginx/include
 
 # Define mountable directories.
-VOLUME ["/etc/nginx", "/var/log/nginx", "/var/www", "/etc/php5"]
+VOLUME ["/etc/nginx", "/var/log/nginx", "/var/www", "/etc/php7"]
 
 # Define working directory.
-RUN mkdir -p /etc-start/nginx /etc-start/php5\
+RUN mkdir -p /etc-start/nginx /etc-start/php7\
 	&& cp -R /etc/nginx/* /etc-start/nginx\
-	&& cp -R /etc/php5/* /etc-start/php5
+	&& cp -R /etc/php7/* /etc-start/php7
 
 RUN deluser xfs && delgroup www-data && \
     addgroup -g 33 www-data && adduser -D -H -G www-data -s /bin/false -u 33 www-data
