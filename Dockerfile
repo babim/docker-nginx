@@ -1,5 +1,9 @@
 FROM babim/debianbase
 
+RUN apt-get update && \
+    apt-get install -y wget gnupg bash && cd / && wget --no-check-certificate https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20SCRIPT%20AUTO/option.sh && \
+    chmod 755 /option.sh
+
 RUN nginx=stable && \
 	echo 'deb http://nginx.org/packages/debian/ jessie nginx' > /etc/apt/sources.list.d/nginx-$nginx.list \
 	&& echo 'deb-src http://nginx.org/packages/debian/ jessie nginx' >> /etc/apt/sources.list.d/nginx-$nginx.list \
@@ -18,14 +22,10 @@ WORKDIR /etc/nginx
 COPY include /etc/nginx/include
 
 # prepare etc start
-RUN [ -d /etc/nginx ] || mkdir -p /etc-start/nginx && \
-    [ -d /etc/nginx ] || cp -R /etc/nginx/* /etc-start/nginx && \
-    [ -d /etc/php ] || mkdir -p /etc-start/php && \
-    [ -d /etc/php ] || cp -R /etc/php/* /etc-start/php && \
-    [ -d /etc/apache2 ] || mkdir -p /etc-start/apache2 && \
-    [ -d /etc/apache2 ] || cp -R /etc/apache2/* /etc-start/apache2 && \
-    [ -d /var/www ] || mkdir -p /etc-start/www && \
-    [ -d /var/www ] || cp -R /var/www/* /etc-start/www
+RUN [[ ! -d /etc/nginx ]] || mkdir -p /etc-start/nginx && \
+    [[ ! -d /etc/nginx ]] || cp -R /etc/nginx/* /etc-start/nginx && \
+    [[ ! -d /var/www ]] || mkdir -p /etc-start/www && \
+    [[ ! -d /var/www ]] || cp -R /var/www/* /etc-start/www
 	
 COPY docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
