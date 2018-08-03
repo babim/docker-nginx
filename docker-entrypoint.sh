@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 export TERM=xterm
 
 if [ ! -f "/etc/nginx/nginx.conf" ]; then cp -R -f /etc-start/nginx/* /etc/nginx; fi
@@ -55,11 +55,7 @@ fi
 
 fi
 
-# ssh
-if [ -f "/runssh.sh" ]; then /runssh.sh; fi
-# cron
-if [ -f "/runcron.sh" ]; then /runcron.sh; fi
-# nfs
-if [ -f "/mountnfs.sh" ]; then /mountnfs.sh; fi
+# option with entrypoint
+`if [ -f "/option.sh" ]; then /option.sh; fi`
 
-nginx -g 'daemon off;'
+exec "$@"
