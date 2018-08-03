@@ -4,8 +4,8 @@ RUN apk add --no-cache wget bash && cd / && wget --no-check-certificate https://
     chmod 755 /option.sh && apk del --purge wget
 
 RUN apk add --no-cache nginx imagemagick \
-	nano php7-fpm php7-json php7-gd php7-sqlite3 curl php7-curl php7-ldap php7-mysql php7-pgsql php7-imap php7-bcmath \
-	php7-xmlrpc php7-mcrypt php7-memcache php7-intl php7-zip php7-opcache php7-bz2 php7-odbc php7-soap \
+	nano php7-fpm php7-json php7-gd php7-sqlite3 curl php7-curl php7-ldap php7-mysqli php7-pgsql php7-imap php7-bcmath \
+	php7-xmlrpc php7-mcrypt php7-intl php7-zip php7-opcache php7-bz2 php7-odbc php7-soap \
 	php7-xml php7-pear
 
 # forward request and error logs to docker log collector
