@@ -1,6 +1,7 @@
 FROM babim/nginx:base
 
 RUN curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20PHP%20install/nginx.sh | bash && \
+    curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20PHP%20install/php-repo-ubuntu.sh | bash && \
     curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20PHP%20install/php7.1.sh | bash
 
 RUN apt-get clean && \
