@@ -1,11 +1,8 @@
 FROM babim/nginx:base
 
-RUN apt-get update && apt-get install -y --force-yes nginx && \
+RUN curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20PHP%20install/nginx.sh | bash && \
     curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20PHP%20install/php-laravel.sh | bash
    
-# Fix run suck
-RUN mkdir -p /run/php/
-
 RUN apt-get clean && \
     apt-get autoclean && \
     apt-get autoremove -y && \
