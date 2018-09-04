@@ -1,5 +1,6 @@
 FROM babim/nginx:base
 
+ENV PHP_VERSION 7.2
 RUN curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20PHP%20install/nginx.sh | bash && \
     curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20PHP%20install/php-repo-ubuntu.sh | bash && \
     curl -s https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20PHP%20install/php-laravel.sh | bash
