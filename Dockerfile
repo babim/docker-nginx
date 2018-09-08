@@ -1,4 +1,4 @@
-FROM babim/ubuntubase
+FROM babim/ubuntubase:18.04
 
 # Download option
 ## ubuntu/debian
