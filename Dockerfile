@@ -1,6 +1,6 @@
 FROM babim/nginx:base
 
-RUN wget -O - https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20PHP%20install/nginx_install.sh | bash
+RUN wget --no-check-certificate -O - https://raw.githubusercontent.com/babim/docker-tag-options/master/z%20PHP%20install/nginx_install.sh | bash
 
 RUN apt-get clean && \
     apt-get autoclean && \
