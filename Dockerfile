@@ -10,3 +10,6 @@ RUN apt-get clean && \
     apt-get autoclean && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/**
+
+ENTRYPOINT ["/start.sh"]
+CMD ["supervisord", "-nc", "/etc/supervisor/supervisord.conf"]
