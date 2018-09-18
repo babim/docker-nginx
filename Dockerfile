@@ -12,8 +12,5 @@ RUN apt-get clean && \
 # Define mountable directories.
 VOLUME ["/etc/nginx", "/var/log/nginx", "/var/www", "/etc/php"]
 
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["supervisord", "-nc", "/etc/supervisor/supervisord.conf"]
-
 # Expose ports.
 EXPOSE 80 443
