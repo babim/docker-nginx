@@ -12,9 +12,6 @@ RUN apk add --no-cache nginx imagemagick \
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
-# Define mountable directories.
-VOLUME ["/etc/nginx", "/var/log/nginx", "/var/www", "/etc/php5"]
-
 # Define working directory.
 WORKDIR /etc/nginx
 
